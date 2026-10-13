@@ -1,1 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghadi</title>
 
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  color: #fff;
+  background: #182321;
+}
+
+.page {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  padding: 38px 24px;
+  background:
+    linear-gradient(rgba(12,22,22,.42), rgba(8,18,18,.68)),
+    url("https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1200&q=85")
+    center / cover fixed;
+}
+
+.name {
+  font-size: 36px;
+  font-style: italic;
+  letter-spacing: 2px;
+  color: #e0dedb;
+}
+
+.quote-area {
+  width: 100%;
+  max-width: 600px;
+  margin: auto 0;
+}
+
+.quote {
+  font-size: clamp(25px, 5vw, 36px);
+  line-height: 1.65;
+  white-space: pre-line;
+}
+
+.author {
+  color: #d0ceca;
+  font-size: 17px;
+  letter-spacing: 1px;
+  margin-top: 25px;
+}
+
+.controls {
+  margin-top: 45px;
+  color: #d0ceca;
+}
+
+button {
+  background: transparent;
+  border: 1px solid #aaa9a766;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.counter {
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.footer {
+  color: #ccc;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 34px 22px;
+  }
+}
+</style>
+</head>
+
+<body>
+<main class="page">
+  <header class="name">Ghadi</header>
+
+  <section class="quote-area">
+    <div class="quote" id="quote"></div>
+    <div class="author" id="author"></div>
+
+    <div class="controls">
+      <div class="counter" id="counter"></div>
+      <button onclick="previousQuote()">←</button>
+      <button onclick="nextQuote()">→</button>
+    </div>
+  </section>
+
+  <footer class="footer">A LITTLE SPACE OF MY OWN</footer>
+</main>
+
+<script>
+const quotes = [
+  {
+    text: "Some feelings are too quiet\nfor words, so I leave them here.",
+    author: "Written by Ghadi"
+  },
+  {
+    text: "One day, in retrospect, the years of struggle will strike you as the most beautiful.",
+    author: "— Sigmund Freud"
+  }
+];
+
+let current = 0;
+
+function showQuote() {
+  document.getElementById("quote").textContent =
+    quotes[current].text;
+
+  document.getElementById("author").textContent =
+    quotes[current].author;
+
+  document.getElementById("counter").textContent =
+    String(current + 1).padStart(2, "0");
+}
+
+function nextQuote() {
+  current = (current + 1) % quotes.length;
+  showQuote();
+}
+
+function previousQuote() {
+  current = (current - 1 + quotes.length) % quotes.length;
+  showQuote();
+}
+
+showQuote();
+</script>
+</body>
+</html>
